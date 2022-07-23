@@ -1,9 +1,8 @@
 import env from 'dotenv';
 import express from 'express';
-import {MongoClient} from 'mongodb';
 import mongoose from 'mongoose';
 
-import Post, {IPost} from './Post';
+import {postRouter} from './endpoints/postRouter';
 
 env.config();
 
@@ -16,11 +15,11 @@ const {
     MONGO_DB,
 } = process.env;
 
-
-
-const jsonParser = express.json();
 const app = express();
-app.use(jsonParser);
+
+app.use(express.json());
+app.use("/api", postRouter);
+
 const DB_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
 
 (async () => {
@@ -32,13 +31,3 @@ const DB_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:
  } 
 })();
 
-app.post('/api/posts', async (req, resp) => {
-    try{
-        const {author, content, title, picture}: IPost = req.body;
-        const post = await Post.create<IPost>({author, content, title, picture});
-        console.log(post);
-        resp.status(200).json(post);
-    } catch(e: any) {
-        resp.status(500).json(e.message);
-    }
-})
