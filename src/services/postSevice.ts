@@ -1,9 +1,24 @@
+import fileUpload from 'express-fileupload';
+
 import Post, {IPost} from '../dto/post';
-import { postRouter } from '../endpoints/postRouter';
+import {fileService} from '../services/fileService';
+
 
 class PostService {
-  public async create(post: IPost) {
-    return await Post.create<IPost>(post);
+  public async create(post: IPost, picture: fileUpload.UploadedFile | fileUpload.UploadedFile[] | undefined) {
+    let fileName: string | undefined;
+    let errorMessage: string | undefined;
+    if(picture !== undefined) {
+      if(picture && Array.isArray(picture)){
+        picture = picture[0];
+      }
+      try{
+        fileName = fileService.saveFile(picture);
+      } catch(e: any) {
+        errorMessage = e.message;
+      }
+    }
+    return {post: await Post.create<IPost>({...post, picture: fileName}), errorMessage};
   }
 
   public async getAll () {
@@ -31,6 +46,23 @@ class PostService {
     }
     const deletedPost = await Post.findByIdAndDelete(id);
     return deletedPost;
+  }
+
+  public async saveFile (id: string, picture: fileUpload.UploadedFile | fileUpload.UploadedFile[] | undefined) {
+    if (picture === undefined) {
+      throw new Error("Файл не прикреплен");
+    }
+
+    if(Array.isArray(picture)) {
+      picture = picture.shift();
+    }
+
+    const post = await Post.findById(id);
+    if(!post) {
+      throw new Error(`post ${id} not found`);
+    }
+    const fileName = fileService.saveFile(picture!);
+    return {fileName, postTitle: post.title};
   }
 
 }
