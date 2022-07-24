@@ -6,6 +6,7 @@ import path from 'path';
 
 import { postRouter } from './endpoints/postRouter';
 import { userRouter } from './endpoints/userRouter';
+import { addSwagger } from './swagger/swagger';
 
 env.config({ path: path.resolve(__dirname, '../../.env') });
 
@@ -32,6 +33,7 @@ const DB_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:
 (async () => {
   try {
     await mongoose.connect(DB_URL);
+    addSwagger(app);
     app.listen(PORT, () => console.log(`server started on ${PORT}, process: ${process.pid}`));
  }catch(err) {
     return console.log(err);
