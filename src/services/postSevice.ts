@@ -12,10 +12,11 @@ class PostService {
       if(picture && Array.isArray(picture)){
         picture = picture[0];
       }
-
-      let r = fileService.saveFile(picture);
-      fileName = r?.fileName;
-      errorMessage = r?.errorMessage;
+      try{
+        fileName = fileService.saveFile(picture);
+      } catch(e: any) {
+        errorMessage = e.message;
+      }
     }
     return {post: await Post.create<IPost>({...post, picture: fileName}), errorMessage};
   }

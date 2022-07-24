@@ -10,20 +10,15 @@ class FileService{
   }
 
   public saveFile(file: fileUpload.UploadedFile) {
-    try{
-      let errorMessage: string|undefined;
       const fileExt = file.name.split(".").pop();
       if(!(fileExt === "png" || fileExt === "jpg"))
       {
-        errorMessage = "Не удалось записать файл: поддерживаемые расширения: jpg, png";
+        throw Error("Не удалось записать файл: поддерживаемые расширения: jpg, png");
       }
       const fileName = uuid.v4() + `.${fileExt}`;
       const filePath = path.resolve(this._currentDir, fileName);
       file?.mv(filePath);
-      return {fileName, errorMessage};
-    } catch(e: any) {
-      console.log(e);
-    }
+      return fileName;
   }
 
   // public async getFile(fileName: string) {
