@@ -10,6 +10,7 @@ class PostConteroller {
       const {post, errorMessage} = await postService.create({author, content, title}, picture);
       if(errorMessage !== undefined) {
         resp.status(200).json({post, errorMessage});
+        return;
       }
       resp.status(200).json(post);
     } catch(e: any) {
@@ -30,8 +31,10 @@ class PostConteroller {
     try{
       const id: string = req.params.id;
       const post = await postService.getOne(id);
-      if(!post)
-        resp.status(401).json({message:`post ${id} not found`});
+      if(!post){
+        resp.status(400).json({message:`post ${id} not found`});
+        return;
+      }
       resp.status(200).json(post);
     } catch(e: any){
       resp.status(500).json(e.message);
