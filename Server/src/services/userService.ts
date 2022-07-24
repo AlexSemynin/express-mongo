@@ -3,6 +3,7 @@ import {fileService} from '../services/fileService';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import config from 'config';
+import { StatusError } from './errorService';
 
 class UserService {
 
@@ -40,20 +41,6 @@ class UserService {
     };
     return { token, user };
   }
-
-
-
-
-
 }
 
 export const userService = new UserService(); 
-
-export class StatusError extends Error {
-  constructor(statuseCode: number, message: string) {
-    super(message);
-    this.StatuseCode = statuseCode;
-  }
-
-  public StatuseCode: number;
-}

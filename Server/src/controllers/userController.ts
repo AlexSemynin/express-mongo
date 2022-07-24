@@ -1,8 +1,8 @@
 import express from 'express';
 import User, { IUserDto, IUser } from '../dto/user';
-import {StatusError, userService} from '../services/userService';
-import bcript from 'bcrypt';
-import {check, validationResult} from 'express-validator';
+import { userService} from '../services/userService';
+import { validationResult} from 'express-validator';
+import { StatusError } from '../services/errorService';
 
 class UserConteroller {
   public async signIn (req: express.Request, resp: express.Response) {
