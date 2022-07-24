@@ -2,10 +2,11 @@ import env from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
 import fileUpload from 'express-fileupload';
+import path from 'path';
 
 import {postRouter} from './endpoints/postRouter';
 
-env.config();
+env.config({ path: path.resolve(__dirname, '../../.env') });
 
 const {
     PORT,

@@ -5,7 +5,7 @@ COPY Server/package-lock.json .
 RUN npm install
 
 COPY Server/src/ ./src/
-COPY Server/.env .
+COPY .env .
 COPY Server/tsconfig.json .
 COPY Server/public/ .public/
 
