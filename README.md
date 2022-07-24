@@ -24,4 +24,5 @@ tecnology:
 ```
 git clone https://github.com/AlexSemynin/express-mongo.git
 docker-compose up -d
+docker-compose logs
 ```
