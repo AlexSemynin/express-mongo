@@ -21,5 +21,7 @@ tecnology:
 ## for developer
 - установить докер
 - клонировать репозиторий
->> git clone https://github.com/AlexSemynin/express-mongo.git
->> docker-compose up -d
+```
+git clone https://github.com/AlexSemynin/express-mongo.git
+docker-compose up -d
+```
