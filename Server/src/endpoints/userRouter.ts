@@ -10,7 +10,7 @@ router.post('/signin',
   body('password').isLength({ min: 5 }),
   userController.signIn);
 router.post('/login', userController.logIn);
-// router.post('/signout', userController.signout);
+router.get('/users', userController.getAll);
 
 
 export {router as userRouter};

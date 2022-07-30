@@ -41,9 +41,9 @@ class UserService {
     return { token, user };
   }
 
-
-
-
+  public async getAllUsers() {
+    return await User.find();
+  }
 
 }
 
