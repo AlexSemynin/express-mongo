@@ -1,11 +1,11 @@
 import Router from "express";
 
 import { postController } from "../controllers/postController";
-import { IPost } from "../dto/post";
+import { jwtMiddleware } from '../middleware/auth.middleware';
 
 const router = Router();
 
-router.post('/posts', postController.create);
+//#region not auth
 /**
  * GET /api/posts
  * @tags Посты
@@ -30,8 +30,13 @@ router.get('/posts', postController.getAll);
  * @param {string} id - id поста
  */
 router.get('/posts/:id', postController.getOne);
-router.put('/posts/:id', postController.update);
-router.delete('/posts/:id', postController.delete);
-router.post('/posts/:id/uploadPicture', postController.uploadPicture);
+//#endregion
+
+//#region auth
+router.post('/posts', jwtMiddleware, postController.create);
+router.put('/posts/:id', jwtMiddleware, postController.update);
+router.delete('/posts/:id', jwtMiddleware, postController.delete);
+router.post('/posts/:id/uploadPicture', jwtMiddleware, postController.uploadPicture);
+//#endregion
 
 export {router as postRouter};
