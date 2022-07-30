@@ -32,6 +32,7 @@ class PostConteroller {
 
   public async getOne (req: express.Request, resp: express.Response) {
     // try{
+      // не фурычит(
       const id: string = req.params.id;
       const post = await postService.getOne(id);
       if(!post){
