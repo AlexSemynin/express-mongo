@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import config from 'config';
 import { StatusError } from './errorService';
+import { IJwtUserPayload } from '../utils/override';
 
 class UserService {
 
@@ -31,8 +32,10 @@ class UserService {
     if(!isPasswordValid) {
       throw new StatusError(400, `Invalid password`);
     }
-
-    const token = jwt.sign({id: candidate._id}, this._secretKey, {expiresIn: '1h'});
+    
+    const id = candidate._id.toString();
+    const payload: IJwtUserPayload = { id };
+    const token = jwt.sign(payload, this._secretKey, {expiresIn: '1h'});
 
     const user: IUserDto = {
       email: candidate.email,
@@ -41,6 +44,11 @@ class UserService {
     };
     return { token, user };
   }
+
+  public async getAllUsers() {
+    return await User.find();
+  }
+
 }
 
 export const userService = new UserService(); 

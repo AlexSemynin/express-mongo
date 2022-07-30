@@ -31,6 +31,15 @@ class UserConteroller {
       return resp.status(500).json(e.message);
     }
   }
+
+  public async getAll(req: express.Request, resp: express.Response) {
+    try{
+      const users = await userService.getAllUsers(); // todo: добавить роли пользователя и проверка по ролям: только для админов
+      return resp.status(200).json(users);
+    } catch (e: any) {
+      return resp.status(500).json(e.message);
+    }
+  }
 }
 
 

@@ -1,13 +1,16 @@
 import express from 'express';
 import { IPost } from '../dto/post';
+import user from '../dto/user';
 import {postService} from '../services/postSevice';
+import { IRequest } from '../utils/override';
 
 class PostConteroller {
-  public async create (req: express.Request, resp: express.Response) {
+  public async create (req: IRequest, resp: express.Response) {
     try{
-      const {author, content, title}: IPost = req.body;
+      const userId = req.User!.id;
+      const {author, content, title}: IPost = req.body; // todo: убрать email пользователя. (можно вытащить из БД если что)
       const picture = req.files?.picture;
-      const {post, errorMessage} = await postService.create({author, content, title}, picture);
+      const {post, errorMessage} = await postService.create({author, content, title, userId}, picture);
       if(errorMessage !== undefined) {
         resp.status(200).json({post, errorMessage});
         return;
