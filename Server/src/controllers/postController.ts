@@ -31,7 +31,8 @@ class PostConteroller {
   }
 
   public async getOne (req: express.Request, resp: express.Response) {
-    try{
+    // try{
+      // не фурычит(
       const id: string = req.params.id;
       const post = await postService.getOne(id);
       if(!post){
@@ -39,9 +40,9 @@ class PostConteroller {
         return;
       }
       resp.status(200).json(post);
-    } catch(e: any){
-      resp.status(500).json(e.message);
-    }
+    // } catch(e: any){
+    //   resp.status(500).json(e.message);
+    // }
   }
 
   public async update (req: express.Request, resp: express.Response) {

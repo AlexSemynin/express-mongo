@@ -7,6 +7,7 @@ import expressJSDocSwagger from 'express-jsdoc-swagger';
 
 import { postRouter } from './endpoints/postRouter';
 import { userRouter } from './endpoints/userRouter';
+import { errorHandler } from './middleware/errorHandling.middleware';
 import {options} from './utils/swagger';
 
 
@@ -31,6 +32,8 @@ app.use(express.json());
 app.use("/api", postRouter);
 app.use("/api", userRouter);
 app.use(express.static('./public/static'));
+app.use(errorHandler); // обязательно в конце
+// https://expressjs.com/ru/guide/error-handling.html
 
 const DB_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
 
