@@ -17,7 +17,8 @@ services:
       - MONGO_DB=$MONGO_DB
     ports:
       - "3000:5000"
-    # volumes:
+    volumes:
+      - ./Server/src:/usr/app/Server/src
     #   - .:/home/node/app
     #   - node_modules:/home/node/app/node_modules
   db:

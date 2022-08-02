@@ -8,7 +8,8 @@
     "build": "tsc",
     "build-watch": "nodemon ./src/index.ts",
     "build-start": "npm run build && npm run start",
-    "build-dev-watch": "npm run build-watch && npm run start"
+    "build-dev-watch": "npm run build-watch && npm run start",
+    "dev": "nodemon -L src/index.ts"
   },
   "keywords": [],
   "author": "",
