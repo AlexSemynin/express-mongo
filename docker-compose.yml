@@ -31,5 +31,14 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
     volumes:  
       - dbdata:/data/db
+  nginxproxy:
+    build:
+      context: .
+      dockerfile: Client/Dockerfile
+    image: nginxproxy
+    container_name: nginxproxy
+    restart: unless-stopped
+    ports:
+      - "3001:6000"
 volumes:
   dbdata:

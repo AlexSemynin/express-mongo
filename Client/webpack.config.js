@@ -63,13 +63,13 @@ module.exports = function (env, argv) {
             directory: path.join(__dirname, 'public'),
           },
           compress: true,
-          // host: "0.0.0.0",
+          host: "0.0.0.0",
           port: 9000,
         },
 
-        // watchOptions: {
-        //   poll: 1000,
-        // },
+        watchOptions: {
+          poll: 1000,
+        },
 
         performance: {
           hints: false,
