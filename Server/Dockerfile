@@ -8,7 +8,7 @@ COPY Server/src/ ./src/
 COPY Server/config ./config/
 COPY .env .
 COPY Server/tsconfig.json .
-COPY Server/public/ .public/
+COPY Server/public/ ./public/
 
 # RUN npm run build
 CMD [ "npm", "run", "dev" ]

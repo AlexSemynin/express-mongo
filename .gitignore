@@ -1,5 +1,9 @@
 node_modules
 /*/dist
-/Server/public
+
+!/Server/public/
+/Server/public/*
+!/Server/public/staticSite/
+
 /*/.vscode
 /node_modules

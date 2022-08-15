@@ -19,6 +19,8 @@ services:
       - "3000:5000"
     volumes:
       - ./Server/src:/usr/app/Server/src
+      - ./Server/public/staticSite:/usr/app/Server/public/staticSite
+      - ./Server/public/static:/usr/app/Server/public/static
     #   - .:/home/node/app
     #   - node_modules:/home/node/app/node_modules
   db:

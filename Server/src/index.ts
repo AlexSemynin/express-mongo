@@ -29,9 +29,12 @@ app.use(fileUpload({
     createParentPath: true
 }));
 app.use(express.json());
+app.use(express.static('./public/staticSite'));
+app.use(express.static('./public/static'));
+
 app.use("/api", postRouter);
 app.use("/api", userRouter);
-app.use(express.static('./public/static'));
+  
 app.use(errorHandler); // обязательно в конце
 // https://expressjs.com/ru/guide/error-handling.html
 
