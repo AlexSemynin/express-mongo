@@ -1,0 +1,15 @@
+$padding: 5rem;
+$padding-mobile: 1rem;
+$header-height: 3rem;
+$mobile-point: 700px;
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+@media screen and (max-width: $mobile-point) {
+  body {
+    padding: 0;
+  } 
+}

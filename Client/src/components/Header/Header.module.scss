@@ -1,0 +1,53 @@
+@import '../../index.scss';
+$search-w: 400px;
+$search-w-m: 200px;
+$search-h: 70%;
+
+.Header {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  height: $header-height;
+  align-items: center;
+  grid-gap: 1rem;
+  padding: 0.5rem $padding;
+  user-select: none;
+
+  &__logo {
+    text-align: center;
+  }
+
+  &__search{
+    text-align: center;
+    height: $search-h;
+    border: 1px solid #777;
+    border-radius: 10px;
+    &:focus {
+      outline: none;
+      border: 1px solid #68a0cd;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    &>.Header__item {
+      margin-right: 0.5rem;
+      cursor: pointer;
+      &.Header__itemUser {
+        cursor: auto;
+      }
+      &.Header__itemProfile {
+      }
+      // &:first-of-type {
+      //   cursor: auto;
+      // }
+    }
+  }
+
+  @media screen and (max-width: $mobile-point) {
+    & {
+      padding: 0 $padding-mobile;
+    } 
+  }
+}
